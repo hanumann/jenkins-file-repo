@@ -18,6 +18,12 @@ pipeline{
             }
         }
         }
-        
+         stage('nexus'){
+            steps{
+                script{
+                 nexusArtifactUploader artifacts: [[artifactId: 'gameoflife', classifier: '', file: 'gameoflife-web/target/gameoflife.war', type: 'war']], credentialsId: 'git', groupId: 'com.wakaleo.gameoflife', nexusUrl: '13.127.78.1:8081/nexus', nexusVersion: 'nexus2', protocol: 'http', repository: 'releases-candidate', version: '1.0'
+                }
+            }
+            }
     }
 }
